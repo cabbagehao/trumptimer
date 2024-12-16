@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://inauguration-countdown-2025.netlify.app/sitemap.xml
+Sitemap: https://trumptimer.us/sitemap.xml
