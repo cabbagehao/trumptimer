@@ -1,15 +1,23 @@
 import React from 'react';
-import Layout from './components/Layout/Layout';
-import CountdownTimer from './components/CountdownTimer';
-import Timeline from './components/Timeline';
-import SocialShare from './components/SocialShare';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import TrumpPolicies from './pages/TrumpPolicies';
+import Inauguration from './pages/Inauguration';
+import TrumpQuotes from './pages/TrumpQuotes';
+import AboutTrump from './pages/AboutTrump';
+import TrumpSpeeches from './pages/TrumpSpeeches';
 
 export default function App() {
   return (
-    <Layout>
-      <CountdownTimer />
-      <Timeline />
-      <SocialShare />
-    </Layout>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<AboutTrump />} />
+        <Route path="/policies" element={<TrumpPolicies />} />
+        <Route path="/speeches" element={<TrumpSpeeches />} />
+        <Route path="/inauguration" element={<Inauguration />} />
+        <Route path="/quotes" element={<TrumpQuotes />} />
+      </Routes>
+    </Router>
   );
 }
