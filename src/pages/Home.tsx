@@ -5,6 +5,7 @@ import Timeline from '../components/Timeline';
 import SocialShare from '../components/SocialShare';
 import Hero from '../components/Home/Hero';
 import HistoricalContext from '../components/Home/HistoricalContext';
+import FAQ from '../components/Home/FAQ';
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <Timeline />
         <Hero />
         <HistoricalContext />
+        <FAQ />
         <SocialShare />
       </div>
     </Layout>
