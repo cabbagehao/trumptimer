@@ -11,7 +11,7 @@ export default function TimelineItem({ event, passed }: TimelineItemProps) {
   return (
     <div className="relative">
       {/* Timeline line */}
-      <div className="absolute left-1 sm:left-6 top-0 h-full w-0.5 bg-gray-200" />
+      <div className="absolute left-3 sm:left-6 top-0 h-full w-0.5 bg-gray-200" />
 
       <div className={`flex gap-2 sm:gap-4 mb-6 sm:mb-8 ${passed ? 'opacity-60' : ''}`}>
         <div className="flex-none z-10 bg-white rounded-full">
