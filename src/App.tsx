@@ -17,6 +17,8 @@ export default function App() {
         <Route path="/speeches" element={<TrumpSpeeches />} />
         <Route path="/inauguration" element={<Inauguration />} />
         <Route path="/quotes" element={<TrumpQuotes />} />
+        {/* Catch all route - redirect to home */}
+        <Route path="*" element={<Home />} />
       </Routes>
     </Router>
   );
