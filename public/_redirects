@@ -1,1 +1,9 @@
-/* /index.html 200
+# Redirect paths without trailing slashes to paths with trailing slashes
+/about      /about/          301
+/policies   /policies/       301
+/speeches   /speeches/       301
+/inauguration /inauguration/ 301
+/quotes     /quotes/         301
+
+# Handle client-side routing
+/*          /index.html      200
