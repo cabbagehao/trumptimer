@@ -19,31 +19,31 @@ export default function Header() {
           
           <nav className="grid grid-cols-2 sm:flex flex-wrap justify-center gap-2 w-full sm:w-auto">
             <Link 
-              to="/about"
+              to="/about/"
               className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors text-sm sm:text-base text-center"
             >
               About Trump
             </Link>
             <Link 
-              to="/policies"
+              to="/policies/"
               className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors text-sm sm:text-base text-center"
             >
               Policies
             </Link>
             <Link 
-              to="/speeches"
+              to="/speeches/"
               className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors text-sm sm:text-base text-center"
             >
               Speeches
             </Link>
             <Link 
-              to="/inauguration"
+              to="/inauguration/"
               className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors text-sm sm:text-base text-center"
             >
               Inauguration
             </Link>
             <Link 
-              to="/quotes"
+              to="/quotes/"
               className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors text-sm sm:text-base text-center col-span-2 sm:col-span-1"
             >
               Quotes
