@@ -63,7 +63,7 @@ export default function SocialShare() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 sm:right-4 sm:bottom-auto sm:left-auto sm:top-1/2 sm:-translate-y-1/2 flex sm:flex-col gap-2 p-4 bg-white sm:bg-transparent shadow-lg sm:shadow-none z-50">
+    <div className="fixed bottom-0 left-0 right-0 sm:right-4 sm:bottom-auto sm:left-auto sm:top-1/2 sm:-translate-y-1/2 flex sm:flex-col gap-2 p-4 bg-white sm:bg-transparent shadow-lg sm:shadow-none z-40">
       {platforms.map((platform) => (
         <button
           key={platform.name}
