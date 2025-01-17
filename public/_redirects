@@ -1,2 +1,5 @@
+# Allow direct access to ads.txt
+/ads.txt    /ads.txt   200
+
 # Handle client-side routing
 /*    /index.html   200
