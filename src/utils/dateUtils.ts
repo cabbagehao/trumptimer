@@ -1,24 +1,27 @@
-export const INAUGURATION_DATE = new Date('2025-01-20T17:00:00.000Z'); // 12:00 EST
+import { INAUGURATION_DATE } from '../constants/dates';
+import type { CountdownTime } from '../types';
 
-export function calculateTimeRemaining(): {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-} {
+export function calculateTimeRemaining(): CountdownTime {
   const now = new Date();
   const difference = INAUGURATION_DATE.getTime() - now.getTime();
 
-  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((difference / 1000 / 60) % 60);
-  const seconds = Math.floor((difference / 1000) % 60);
+  // If inauguration has passed, calculate time since inauguration
+  if (difference < 0) {
+    const timeSince = Math.abs(difference);
+    return {
+      days: Math.floor(timeSince / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((timeSince / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((timeSince / 1000 / 60) % 60),
+      seconds: Math.floor((timeSince / 1000) % 60)
+    };
+  }
 
+  // Otherwise, calculate time until inauguration
   return {
-    days,
-    hours,
-    minutes,
-    seconds,
+    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((difference / 1000 / 60) % 60),
+    seconds: Math.floor((difference / 1000) % 60)
   };
 }
 
@@ -28,4 +31,8 @@ export function formatTimeUnit(value: number): string {
 
 export function hasEventPassed(eventDate: Date): boolean {
   return new Date() > eventDate;
+}
+
+export function isInaugurationPassed(): boolean {
+  return new Date() > INAUGURATION_DATE;
 }

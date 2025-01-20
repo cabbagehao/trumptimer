@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Clock, Calendar } from 'lucide-react';
-import { calculateTimeRemaining } from '../../utils/dateUtils';
+import { calculateTimeRemaining, isInaugurationPassed } from '../../utils/dateUtils/calculations';
 import type { CountdownTime } from '../../types';
 import CountdownDisplay from './CountdownDisplay';
 
 export default function CountdownTimer() {
   const [timeRemaining, setTimeRemaining] = useState<CountdownTime>(calculateTimeRemaining());
+  const isPassed = isInaugurationPassed();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -20,7 +21,7 @@ export default function CountdownTimer() {
       <div className="flex items-center gap-2 mb-4">
         <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
         <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
-          Trump Timer
+          {isPassed ? "Trump 2.0 Timer" : "Countdown to Inauguration"}
         </h2>
         <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
       </div>
@@ -28,8 +29,9 @@ export default function CountdownTimer() {
         {(Object.keys(timeRemaining) as Array<keyof CountdownTime>).map((unit) => (
           <CountdownDisplay
             key={unit}
-            timeUnit={unit}
+            label={unit.charAt(0).toUpperCase() + unit.slice(1)}
             value={timeRemaining[unit]}
+            unit={unit}
           />
         ))}
       </div>

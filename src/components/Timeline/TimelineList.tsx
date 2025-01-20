@@ -1,15 +1,16 @@
 import { timelineEvents } from '../../data/timelineEvents';
-import { hasEventPassed } from '../../utils/dateUtils';
 import TimelineItem from './TimelineItem';
 
 export default function TimelineList() {
+  // Sort events in reverse chronological order
+  const sortedEvents = [...timelineEvents].sort((a, b) => b.date.getTime() - a.date.getTime());
+
   return (
     <div className="relative pl-8 sm:pl-2">
-      {timelineEvents.map((event) => (
+      {sortedEvents.map((event) => (
         <TimelineItem
           key={event.title}
           event={event}
-          passed={hasEventPassed(event.date)}
         />
       ))}
     </div>

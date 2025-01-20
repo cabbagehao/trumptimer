@@ -5,7 +5,6 @@ import TrumpPolicies from './pages/TrumpPolicies';
 import Inauguration from './pages/Inauguration';
 import TrumpQuotes from './pages/TrumpQuotes';
 import AboutTrump from './pages/AboutTrump';
-import TrumpSpeeches from './pages/TrumpSpeeches';
 
 export default function App() {
   return (
@@ -16,8 +15,6 @@ export default function App() {
         <Route path="/about/" element={<AboutTrump />} />
         <Route path="/policies" element={<TrumpPolicies />} />
         <Route path="/policies/" element={<TrumpPolicies />} />
-        <Route path="/speeches" element={<TrumpSpeeches />} />
-        <Route path="/speeches/" element={<TrumpSpeeches />} />
         <Route path="/inauguration" element={<Inauguration />} />
         <Route path="/inauguration/" element={<Inauguration />} />
         <Route path="/quotes" element={<TrumpQuotes />} />
