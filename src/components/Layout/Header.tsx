@@ -1,12 +1,10 @@
 import React from 'react';
 import { Flag } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import { isInaugurationPassed } from '../../utils/dateUtils';
 
 export default function Header() {
   const location = useLocation();
   const isHome = location.pathname === '/';
-  const isPassed = isInaugurationPassed();
 
   return (
     <header className="bg-red-600 text-white py-6 mb-8">
@@ -15,11 +13,17 @@ export default function Header() {
           <Link to="/" className="flex items-center">
             <Flag className="w-8 h-8 mr-3" />
             <h1 className="text-2xl sm:text-3xl font-bold text-center">
-              {isPassed ? "2025: The Return of Donald Trump" : "Donald Trump Inauguration 2025"}
+              Trump Term End Countdown 2029
             </h1>
           </Link>
           
           <nav className="grid grid-cols-2 sm:flex flex-wrap justify-center gap-2 w-full sm:w-auto">
+            <Link 
+              to="/discussions/"
+              className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors text-sm sm:text-base text-center"
+            >
+              Discussions
+            </Link>
             <Link 
               to="/about/"
               className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors text-sm sm:text-base text-center"
@@ -31,12 +35,6 @@ export default function Header() {
               className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors text-sm sm:text-base text-center"
             >
               Policies
-            </Link>
-            <Link 
-              to="/inauguration/"
-              className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors text-sm sm:text-base text-center"
-            >
-              Inauguration
             </Link>
             <Link 
               to="/quotes/"

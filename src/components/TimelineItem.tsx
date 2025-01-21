@@ -1,4 +1,5 @@
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, MessageCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import type { TimelineEvent } from '../types';
 
 interface TimelineItemProps {
@@ -17,27 +18,33 @@ export default function TimelineItem({ event }: TimelineItemProps) {
         </div>
         <div className="flex-grow">
           <div>
-            <h3 className="text-base sm:text-lg font-semibold text-gray-800">
-              {event.title}
-            </h3>
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-800">
+                {event.title}
+              </h3>
+              <Link
+                to={`/discussions/event/${encodeURIComponent(event.title)}`}
+                className="inline-flex items-center text-red-600 hover:underline"
+                title="Join discussion"
+              >
+                <MessageCircle className="w-4 h-4" />
+              </Link>
+            </div>
             <p className="text-xs sm:text-sm text-red-600 mb-1 sm:mb-2">
               {event.date.toLocaleDateString()}
             </p>
             <p className="text-sm sm:text-base text-gray-700">
               {event.description}
               {event.link && (
-                <>
-                  {' '}
-                  <a 
-                    href={event.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-red-600 hover:underline"
-                    title="Read more"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                </>
+                <a 
+                  href={event.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-red-600 hover:underline ml-2"
+                  title="Read more"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                </a>
               )}
             </p>
           </div>

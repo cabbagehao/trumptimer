@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { INAUGURATION_DATE } from '../../constants/dates';
 
 export default function FAQ() {
-  const daysUntilInauguration = Math.ceil(
+  const daysUntilTermEnd = Math.ceil(
     (INAUGURATION_DATE.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24)
   );
 
@@ -18,62 +18,44 @@ export default function FAQ() {
       <div className="space-y-6">
         <div>
           <h3 className="text-lg font-semibold mb-2">
-            How many days until the next presidential inauguration 2025?
+            How long until Trump's presidential term ends?
           </h3>
           <p className="text-gray-700">
-            There are approximately {daysUntilInauguration} days until the next presidential 
-            inauguration on January 20, 2025. You can follow our{' '}
+            There are approximately {daysUntilTermEnd} days remaining in President Trump's second term, 
+            which ends on January 20, 2029. Follow our{' '}
             <Link to="/" className="text-red-600 hover:underline">
               live countdown timer
             </Link>{' '}
-            to track the exact time remaining until this historic event.
+            to track the exact time remaining.
           </p>
         </div>
 
         <div>
           <h3 className="text-lg font-semibold mb-2">
-            What happens on Trump's Inauguration Day?
+            What major events can we expect during Trump's term?
           </h3>
           <p className="text-gray-700">
-            Inauguration Day is filled with ceremonial events including the presidential oath of 
-            office, inaugural address, and celebratory parade. Visit our detailed{' '}
-            <Link to="/inauguration" className="text-red-600 hover:underline">
-              inauguration ceremony guide
+            President Trump's second term is expected to include significant policy changes and executive 
+            actions. Our{' '}
+            <Link to="/policies" className="text-red-600 hover:underline">
+              policy tracker
             </Link>{' '}
-            to learn about the full schedule of events, key participants, and historical significance 
-            of this momentous occasion.
+            provides real-time updates on major decisions, international agreements, and domestic policy changes.
           </p>
         </div>
 
         <div>
           <h3 className="text-lg font-semibold mb-2">
-            How to get Trump Inauguration 2025 tickets?
+            How can I stay updated on Trump's presidential actions?
           </h3>
           <div className="text-gray-700 space-y-4">
-            <div>
-              <p className="font-medium mb-1">Ticket Distribution:</p>
-              <p>
-                Through Congressional Offices: Inauguration tickets are typically distributed for free 
-                by the offices of U.S. Senators and Representatives. You should contact your local 
-                congressional representative as soon as possible to request tickets.
-              </p>
-            </div>
-            
-            <div>
-              <p className="font-medium mb-1">Inauguration Ticket Quantity and Price:</p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>Limited Availability: Each congressional office has a limited number of tickets to distribute, which are usually given out on a first-come, first-served basis.</li>
-                <li>Free of Charge: Tickets to the official swearing-in ceremony are free and are not sold to the public.</li>
-              </ul>
-            </div>
-
-            <div>
-              <p className="font-medium mb-1">Viewing Inauguration Without Tickets:</p>
-              <ul className="list-disc pl-5 space-y-1">
-                <li>National Mall: Although you won't be directly at the swearing-in, you can watch it live on large screens set up along the National Mall, no ticket required.</li>
-                <li>Parade Route: Parts of the inauguration parade are accessible to the public without tickets. You can view the parade from various points along the route without a ticket.</li>
-              </ul>
-            </div>
+            <p>Follow our live updates through multiple channels:</p>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>Real-time news updates on major policy changes</li>
+              <li>Executive order tracking and analysis</li>
+              <li>International relations developments</li>
+              <li>Domestic policy implementation updates</li>
+            </ul>
           </div>
         </div>
       </div>

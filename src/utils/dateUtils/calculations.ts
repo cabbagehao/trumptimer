@@ -5,18 +5,6 @@ export function calculateTimeRemaining(): CountdownTime {
   const now = new Date();
   const difference = INAUGURATION_DATE.getTime() - now.getTime();
 
-  // If inauguration has passed, calculate time since inauguration
-  if (difference < 0) {
-    const timeSince = Math.abs(difference);
-    return {
-      days: Math.floor(timeSince / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((timeSince / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((timeSince / 1000 / 60) % 60),
-      seconds: Math.floor((timeSince / 1000) % 60)
-    };
-  }
-
-  // Otherwise, calculate time until inauguration
   return {
     days: Math.floor(difference / (1000 * 60 * 60 * 24)),
     hours: Math.floor((difference / (1000 * 60 * 60)) % 24),

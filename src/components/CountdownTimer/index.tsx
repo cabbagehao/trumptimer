@@ -21,7 +21,7 @@ export default function CountdownTimer() {
       <div className="flex items-center gap-2 mb-4">
         <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
         <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
-          Trump 2.0 Timer
+          Trump Term End Timer
         </h2>
         <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-red-600" />
       </div>

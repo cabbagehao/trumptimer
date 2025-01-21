@@ -6,18 +6,18 @@ export default function Hero() {
     <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
       <div className="flex items-center gap-2 mb-4">
         <Flag className="w-6 h-6 text-red-600" />
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Donald Trump's Historic Return</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">Trump's Presidential Term 2025-2029</h1>
       </div>
       <div className="prose max-w-none">
         <p className="text-lg text-gray-700 mb-4">
-          As America anticipates Donald Trump's potential return to the presidency in 2025, we stand at a historic moment 
-          that could mirror Grover Cleveland's remarkable non-consecutive presidential terms. Trump's journey toward becoming 
-          the 47th President of the United States represents a unique chapter in American political history.
+          Track Donald Trump's historic second presidential term with our real-time countdown and news updates. 
+          Stay informed about major policy changes, executive orders, and key events that are shaping America's 
+          future under Trump's leadership.
         </p>
         <p className="text-gray-600 mb-6">
-          Following the 2024 election results, this countdown tracks the timeline to Donald Trump's inauguration ceremony 
-          scheduled for January 20, 2025. From Electoral College voting to the official transition of power, witness every 
-          milestone in Trump's path to his second presidency.
+          From executive orders to international relations, follow the latest developments of Trump's presidency. 
+          Our timeline tracks significant policy changes, diplomatic events, and major announcements that define 
+          this consequential period in American history.
         </p>
         <div className="space-y-2">
           <h2 className="text-xl font-semibold mb-2">Official Resources:</h2>
@@ -29,17 +29,7 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="text-red-600 hover:underline flex items-center gap-1"
               >
-                Official Campaign Website <ExternalLink className="w-4 h-4" />
-              </a>
-            </li>
-            <li>
-              <a 
-                href="https://www.inaugural.senate.gov/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-red-600 hover:underline flex items-center gap-1"
-              >
-                Joint Congressional Committee on Inaugural Ceremonies <ExternalLink className="w-4 h-4" />
+                Official Website <ExternalLink className="w-4 h-4" />
               </a>
             </li>
             <li>
@@ -49,7 +39,17 @@ export default function Hero() {
                 rel="noopener noreferrer"
                 className="text-red-600 hover:underline flex items-center gap-1"
               >
-                Follow Trump on Truth Social <ExternalLink className="w-4 h-4" />
+                Truth Social Updates <ExternalLink className="w-4 h-4" />
+              </a>
+            </li>
+            <li>
+              <a 
+                href="https://www.whitehouse.gov/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-red-600 hover:underline flex items-center gap-1"
+              >
+                White House Official Website <ExternalLink className="w-4 h-4" />
               </a>
             </li>
           </ul>

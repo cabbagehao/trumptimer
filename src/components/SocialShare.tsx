@@ -1,6 +1,8 @@
-import { Facebook, Share2 } from 'lucide-react';
+import { Facebook, Share2, Menu, X } from 'lucide-react';
+import { useState } from 'react';
 import { calculateTimeRemaining } from '../utils/dateUtils';
 import { generateShareImage } from '../utils/imageGenerator';
+import FeedbackButton from './Feedback/FeedbackButton';
 
 interface SocialPlatform {
   name: string;
@@ -42,9 +44,11 @@ const platforms: SocialPlatform[] = [
 ];
 
 export default function SocialShare() {
+  const [isOpen, setIsOpen] = useState(false);
+
   const handleShare = async (platform: SocialPlatform) => {
     const time = calculateTimeRemaining();
-    const shareText = `🇺🇸 Countdown to Inauguration Day 2025:\n${time.days} days, ${time.hours} hours, ${time.minutes} minutes\n#Inauguration2025`;
+    const shareText = `🇺🇸 Trump Presidential Term Countdown:\n${time.days} days, ${time.hours} hours, ${time.minutes} minutes remaining\n#Trump2029`;
     
     try {
       const imageBlob = await generateShareImage(time);
@@ -63,18 +67,42 @@ export default function SocialShare() {
   };
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 sm:right-4 sm:bottom-auto sm:left-auto sm:top-1/2 sm:-translate-y-1/2 flex sm:flex-col gap-2 p-4 bg-white sm:bg-transparent shadow-lg sm:shadow-none z-50">
-      {platforms.map((platform) => (
-        <button
-          key={platform.name}
-          onClick={() => handleShare(platform)}
-          className={`flex-1 sm:flex-none flex items-center justify-center gap-2 ${platform.className} text-white px-3 py-2 sm:px-4 sm:py-2 rounded-lg font-medium transition-colors shadow-lg hover:shadow-xl`}
-          title={`Share on ${platform.name}`}
-        >
-          {platform.icon}
-          <span className="text-sm sm:text-base hidden sm:inline">Share on {platform.name}</span>
-        </button>
-      ))}
-    </div>
+    <>
+      {/* Mobile Toggle Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed bottom-4 right-4 z-50 lg:hidden bg-red-600 text-white p-3 rounded-full shadow-lg"
+        aria-label="Toggle share buttons"
+      >
+        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+      </button>
+
+      {/* Share Buttons */}
+      <div 
+        className={`
+          fixed bottom-24 right-4 flex flex-col gap-2 z-40
+          lg:bottom-auto lg:right-4 lg:left-auto lg:top-1/2 lg:-translate-y-1/2 
+          lg:flex lg:flex-col lg:gap-2 p-4 
+          ${isOpen ? 'flex' : 'hidden lg:flex'}
+        `}
+      >
+        {/* Mobile Feedback Button */}
+        <div className="lg:hidden">
+          <FeedbackButton isMobile isOpen={isOpen} />
+        </div>
+
+        {platforms.map((platform) => (
+          <button
+            key={platform.name}
+            onClick={() => handleShare(platform)}
+            className={`flex items-center justify-center gap-2 ${platform.className} text-white px-3 py-2 sm:px-4 sm:py-2 rounded-lg font-medium transition-colors shadow-lg hover:shadow-xl`}
+            title={`Share on ${platform.name}`}
+          >
+            {platform.icon}
+            <span className="text-sm sm:text-base hidden sm:inline">Share on {platform.name}</span>
+          </button>
+        ))}
+      </div>
+    </>
   );
 }
