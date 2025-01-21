@@ -2,13 +2,13 @@ import { KEY_DATES } from '../constants/dates';
 
 export const timelineEvents = [
   {
-    date: new Date('2025-01-21T16:00:00Z'),
+    date: new Date('2025-01-21T00:00:00Z'),
     title: 'Trump withdraws US from Paris Agreement and WHO',
     description: 'President Trump announces US withdrawal from the Paris Climate Agreement and World Health Organization on his first full day in office.',
     link: 'https://www.youtube.com/watch?v=pfmuD1VIen4'
   },
   {
-    date: new Date('2025-01-21T14:00:00Z'),
+    date: new Date('2025-01-21T00:00:00Z'),
     title: 'Border Emergency Declaration',
     description: 'Trump declares border emergency and initiates process to end US birthright citizenship.',
     link: 'https://www.bbc.com/news/articles/cwyjqgl2erzo'
