@@ -2,6 +2,12 @@ import { KEY_DATES } from '../constants/dates';
 
 export const timelineEvents = [
   {
+    date: new Date('2025-01-22T00:00:00Z'),
+    title: 'Tech giants are putting $500bn into \'Stargate\' to build up AI in US',
+    description: 'Major technology companies announce a massive $500 billion investment in \'Stargate\' project to advance AI development in the United States.',
+    link: 'https://www.bbc.co.uk/news/articles/cy4m84d2xz2o'
+  },
+  {
     date: new Date('2025-01-21T00:00:00Z'),
     title: 'Trump withdraws US from Paris Agreement and WHO',
     description: 'President Trump announces US withdrawal from the Paris Climate Agreement and World Health Organization on his first full day in office.',
