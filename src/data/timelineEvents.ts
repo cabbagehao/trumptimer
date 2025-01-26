@@ -2,8 +2,20 @@ import { KEY_DATES } from '../constants/dates';
 
 export const timelineEvents = [
   {
+    date: new Date('2025-01-26T14:00:00Z'),
+    title: 'Trump to decide on TikTok purchase within 30 days',
+    description: 'President Trump reveals ongoing discussions with multiple potential buyers for TikTok, announcing a decision timeline of 30 days.',
+    link: 'https://www.voanews.com/a/trump-discussing-tiktok-purchase-with-multiple-people-decision-in-30-days/7950571.html'
+  },
+  {
+    date: new Date('2025-01-23T00:00:00Z'), 
+    title: 'Trump revokes Biden\'s AI safety order',
+    description: 'President Trump rescinds former President Biden\'s executive order on AI safety, following through on his campaign promise.',
+    link: 'https://apnews.com/article/trump-ai-repeal-biden-executive-order-artificial-intelligence-18cb6e4ffd1ca87151d48c3a0e1ad7c1'
+  },
+  {
     date: new Date('2025-01-22T00:00:00Z'),
-    title: 'Tech giants are putting $500bn into \'Stargate\' to build up AI in US',
+    title: 'Stargate: Trump unveils $500bn AI initiative',
     description: 'Major technology companies announce a massive $500 billion investment in \'Stargate\' project to advance AI development in the United States.',
     link: 'https://www.bbc.co.uk/news/articles/cy4m84d2xz2o'
   },
@@ -15,9 +27,15 @@ export const timelineEvents = [
   },
   {
     date: new Date('2025-01-21T00:00:00Z'),
-    title: 'Border Emergency Declaration',
+    title: 'Trump declares border emergency',
     description: 'Trump declares border emergency and initiates process to end US birthright citizenship.',
     link: 'https://www.bbc.com/news/articles/cwyjqgl2erzo'
+  },
+  {
+    date: new Date('2025-01-20T18:00:00Z'),
+    title: 'Trump signed an executive order to cancel "birthright citizenship"',
+    description: 'President Trump signs executive order attempting to end birthright citizenship for children of non-citizens and unauthorized immigrants.',
+    link: 'https://apnews.com/article/birthright-citizenship-trump-executive-order-immigrants-fc7dd75ba1fb0a10f56b2a85b92dbe53'
   },
   {
     date: new Date('2025-01-20T17:00:00Z'),
@@ -39,13 +57,13 @@ export const timelineEvents = [
   },
   {
     date: new Date('2025-01-19T12:00:00Z'),
-    title: 'TikTok Ban Delayed',
+    title: 'TikTok resumes US operations',
     description: 'Trump delays the TikTok ban, and TikTok resumes operations in the U.S.',
     link: 'https://www.bbc.co.uk/news/articles/cjde3p0rnjgo'
   },
   {
     date: new Date('2025-01-17T15:00:00Z'),
-    title: 'Trump-Xi Phone Call',
+    title: 'Trump and Xi hold phone talks',
     description: 'Trump and Xi Jinping hold a phone call to discuss global issues.',
     link: 'https://edition.cnn.com/2025/01/17/world/trump-xi-phone-call-us-china-intl/index.html'
   },
