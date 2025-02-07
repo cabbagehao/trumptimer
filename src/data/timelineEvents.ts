@@ -2,6 +2,18 @@ import { KEY_DATES } from '../constants/dates';
 
 export const timelineEvents = [
   {
+    date: new Date('2025-02-05T14:00:00Z'),
+    title: 'Trump\'s birthright citizenship order blocked by Maryland and Washington judges',
+    description: 'Federal judges in Maryland and Washington state block Trump\'s executive order attempting to end birthright citizenship.',
+    link: 'https://www.cbsnews.com/news/maryland-judge-blocks-trumps-birthright-citizenship-order/'
+  },
+  {
+    date: new Date('2025-02-04T18:00:00Z'),
+    title: 'Trump says the U.S. will \'take over\' Gaza',
+    description: 'Trump announces plans for U.S. intervention in Gaza, stating intentions to "take over" the region.',
+    link: 'https://www.npr.org/2025/02/05/nx-s1-5287576/trump-gaza-takeover'
+  },
+  {
     date: new Date('2025-01-26T14:00:00Z'),
     title: 'Trump to decide on TikTok purchase within 30 days',
     description: 'President Trump reveals ongoing discussions with multiple potential buyers for TikTok, announcing a decision timeline of 30 days.',
