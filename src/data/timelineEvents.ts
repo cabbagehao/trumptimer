@@ -2,6 +2,12 @@ import { KEY_DATES } from '../constants/dates';
 
 export const timelineEvents = [
   {
+    date: new Date('2025-02-07T16:00:00Z'),
+    title: 'Trump revokes Biden\'s security clearance: \'Joe, you\'re fired\'',
+    description: 'In a retaliatory move referencing Biden\'s 2021 decision to revoke his security clearance, Trump strips former President Biden\'s access to classified information.',
+    link: 'https://thehill.com/homenews/administration/5133854-trump-biden-security-clearance-revoked/'
+  },
+  {
     date: new Date('2025-02-05T14:00:00Z'),
     title: 'Trump\'s birthright citizenship order blocked by Maryland and Washington judges',
     description: 'Federal judges in Maryland and Washington state block Trump\'s executive order attempting to end birthright citizenship.',
