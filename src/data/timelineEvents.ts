@@ -9,7 +9,7 @@ export const timelineEvents = [
   },
   {
     date: new Date('2025-02-05T14:00:00Z'),
-    title: 'Trump\'s birthright citizenship order blocked by Maryland and Washington judges',
+    title: 'Trump\'s birthright citizenship order blocked',
     description: 'Federal judges in Maryland and Washington state block Trump\'s executive order attempting to end birthright citizenship.',
     link: 'https://www.cbsnews.com/news/maryland-judge-blocks-trumps-birthright-citizenship-order/'
   },
