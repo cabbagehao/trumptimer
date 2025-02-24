@@ -2,6 +2,24 @@ import { KEY_DATES } from '../constants/dates';
 
 export const timelineEvents = [
   {
+    date: new Date('2025-02-16T16:00:00Z'),
+    title: 'Ukraine Rejects Trump Demand for Half of Its Mineral Resources',
+    description: 'Ukraine rejects Trump\'s proposal to share 50% of its mineral resources in exchange for continued U.S. support.',
+    link: 'https://www.nytimes.com/2025/02/15/world/europe/ukraine-minerals-us-deal-rejected.html'
+  },
+  {
+    date: new Date('2025-02-13T18:00:00Z'),
+    title: 'Trump Discusses Ending Ukraine War with Putin',
+    description: 'Trump holds discussions with Russian President Putin regarding potential solutions to end the Ukraine conflict.',
+    link: 'https://www.reuters.com/world/trump-says-he-discussed-ending-ukraine-war-with-russias-putin-2025-02-12/'
+  },
+  {
+    date: new Date('2025-02-07T20:00:00Z'),
+    title: 'Trump: China\'s DeepSeek Not Security Concern',
+    description: 'Trump dismisses security concerns about Chinese AI company DeepSeek, contradicting intelligence assessments.',
+    link: 'https://www.newsmax.com/newsfront/donald-trump-deepseek-china/2025/02/07/id/1198249/'
+  },
+  {
     date: new Date('2025-02-07T16:00:00Z'),
     title: 'Trump revokes Biden\'s security clearance: \'Joe, you\'re fired\'',
     description: 'In a retaliatory move referencing Biden\'s 2021 decision to revoke his security clearance, Trump strips former President Biden\'s access to classified information.',
