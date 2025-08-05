@@ -40,3 +40,51 @@ export const SEO = {
   ogImage: "https://images.unsplash.com/photo-1682687220742-aba13b6e50ba",
   keywords: [...SEO_KEYWORDS.primary, ...SEO_KEYWORDS.secondary, ...SEO_KEYWORDS.related].join(', '),
 } as const;
+
+export const PAGE_SEO = {
+  home: {
+    title: "Trump Presidential Term Countdown",
+    description: "Track Trump's presidential term with real-time updates on major policy changes, executive orders, and key events shaping America's future.",
+    keywords: "trump presidency countdown, trump term 2025-2029, presidential term tracker"
+  },
+  about: {
+    title: "About Donald Trump",
+    description: "Learn about Donald Trump, the 47th President of the United States. Biography, political career, and key achievements during his presidency.",
+    keywords: "donald trump biography, 47th president, trump political career, trump achievements"
+  },
+  policies: {
+    title: "Trump Policies 2025-2029",
+    description: "Comprehensive overview of Donald Trump's presidential policies, executive orders, and major initiatives during his 2025-2029 term.",
+    keywords: "trump policies, trump executive orders, trump initiatives, presidential policies 2025"
+  },
+  quotes: {
+    title: "Donald Trump's Notable Quotes",
+    description: "Collection of Donald Trump's most memorable quotes, speeches, and statements from his presidency and political career.",
+    keywords: "trump quotes, trump speeches, presidential quotes, trump statements"
+  },
+  discussions: {
+    title: "Trump Presidency Discussions",
+    description: "Join discussions about Trump's presidency, share opinions, and connect with others following the 2025-2029 presidential term.",
+    keywords: "trump discussions, presidential forum, trump presidency community, political discussions"
+  },
+  termCountdown: {
+    title: "Trump Term Countdown & Presidency Tracker",
+    description: "Real-time countdown to key milestones in Trump's presidential term. Track important dates, events, and achievements.",
+    keywords: "trump term countdown, presidency tracker, presidential milestones, trump term events"
+  },
+  speeches: {
+    title: "Donald Trump's Notable Speeches",
+    description: "Complete collection of Donald Trump's presidential speeches, addresses, and public statements during his 2025-2029 term.",
+    keywords: "trump speeches, presidential addresses, trump public statements, political speeches"
+  },
+  inauguration: {
+    title: "Trump Inauguration 2025",
+    description: "Complete coverage of Donald Trump's 2025 presidential inauguration ceremony, schedule, participants, and historical significance.",
+    keywords: "trump inauguration 2025, presidential inauguration, inauguration ceremony, trump swearing in"
+  },
+  president47: {
+    title: "The 47th President",
+    description: "Donald Trump as the 47th President of the United States. Historic return to office and presidency overview for 2025-2029.",
+    keywords: "47th president, trump presidency, donald trump president, trump administration"
+  }
+} as const;

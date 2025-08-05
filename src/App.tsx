@@ -8,6 +8,10 @@ import TrumpPolicies from './pages/TrumpPolicies';
 import TrumpQuotes from './pages/TrumpQuotes';
 import AboutTrump from './pages/AboutTrump';
 import Discussions from './pages/Discussions';
+import TrumpTermCountdown from './pages/TrumpTermCountdown';
+import TrumpSpeeches from './pages/TrumpSpeeches';
+import Inauguration from './pages/Inauguration';
+import President47 from './pages/President47';
 
 export default function App() {
   useEffect(() => {
@@ -63,6 +67,14 @@ export default function App() {
         <Route path="/discussions" element={<Discussions />} />
         <Route path="/discussions/" element={<Discussions />} />
         <Route path="/discussions/event/:eventTitle" element={<Discussions />} />
+        <Route path="/term-countdown" element={<TrumpTermCountdown />} />
+        <Route path="/term-countdown/" element={<TrumpTermCountdown />} />
+        <Route path="/speeches" element={<TrumpSpeeches />} />
+        <Route path="/speeches/" element={<TrumpSpeeches />} />
+        <Route path="/inauguration" element={<Inauguration />} />
+        <Route path="/inauguration/" element={<Inauguration />} />
+        <Route path="/president47" element={<President47 />} />
+        <Route path="/president47/" element={<President47 />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

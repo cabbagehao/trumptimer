@@ -16,13 +16,19 @@ export default function Header() {
           <Link to="/" className="flex items-center">
             <Flag className="w-8 h-8 mr-3" />
             <h1 className="text-2xl sm:text-3xl font-bold">
-              Trump Term End Countdown 2029
+              Trump Inauguration Countdown
             </h1>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-4 ml-auto">
             <nav className="flex gap-2">
+              <Link 
+                to="/term-countdown/"
+                className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors"
+              >
+                Term Countdown
+              </Link>
               <Link 
                 to="/discussions/"
                 className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors"
@@ -73,6 +79,13 @@ export default function Header() {
               <div className="mb-2">
                 <AuthButton />
               </div>
+              <Link 
+                to="/term-countdown/"
+                className="bg-white text-red-600 px-4 py-2 rounded-lg font-semibold hover:bg-red-50 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Term Countdown
+              </Link>
               <Link 
                 to="/discussions/"
                 className="bg-white text-red-600 px-4 py-2 rounded-lg font-semibold hover:bg-red-50 transition-colors"
