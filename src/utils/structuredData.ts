@@ -75,12 +75,36 @@ export function getEventStructuredData(name: string, description: string, startD
     "description": description,
     "startDate": startDate,
     "endDate": endDate || startDate,
-    "location": location || "United States",
+    "location": {
+      "@type": "Place",
+      "name": location || "United States",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US",
+        "addressRegion": "DC",
+        "addressLocality": "Washington"
+      }
+    },
     "organizer": {
       "@type": "Organization",
-      "name": "Trump Administration"
+      "name": "Trump Administration",
+      "url": "https://www.whitehouse.gov"
     },
-    "url": SEO.url
+    "performer": {
+      "@type": "Person",
+      "name": "Donald Trump",
+      "jobTitle": "47th President of the United States"
+    },
+    "image": SEO.ogImage,
+    "url": SEO.url,
+    "eventStatus": "https://schema.org/EventScheduled",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "validFrom": startDate
+    }
   };
 }
 

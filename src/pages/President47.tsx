@@ -1,10 +1,34 @@
 import React from 'react';
 import { Crown, Award, Landmark } from 'lucide-react';
 import Layout from '../components/Layout/Layout';
+import SEOHead from '../components/SEO/SEOHead';
+import { PAGE_SEO } from '../constants/seo';
+import { getPersonStructuredData, getBreadcrumbStructuredData } from '../utils/structuredData';
 
 export default function President47() {
+  const breadcrumbData = getBreadcrumbStructuredData([
+    { name: "Home", url: "https://trumptimer.us/" },
+    { name: "The 47th President", url: "https://trumptimer.us/president47/" }
+  ]);
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      getPersonStructuredData(),
+      breadcrumbData
+    ]
+  };
+
   return (
     <Layout>
+      <SEOHead
+        title={PAGE_SEO.president47.title}
+        description={PAGE_SEO.president47.description}
+        keywords={PAGE_SEO.president47.keywords}
+        path="/president47/"
+        type="article"
+        structuredData={structuredData}
+      />
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
           <div className="flex items-center gap-2 mb-6">
