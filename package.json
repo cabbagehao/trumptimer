@@ -5,11 +5,41 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:client && npm run build:ssg",
-    "build:client": "tsc && vite build",
+    "build": "vite build && react-snap",
+    "build:client": "vite build",
     "build:ssg": "node scripts/prerender.js",
     "lint": "eslint .",
     "preview": "vite preview"
+  },
+  "reactSnap": {
+    "source": "dist",
+    "destination": "dist",
+    "include": [
+      "/",
+      "/about/",
+      "/policies/",
+      "/quotes/",
+      "/term-countdown/",
+      "/speeches/",
+      "/inauguration/",
+      "/president47/",
+      "/trump-die/"
+    ],
+    "skipThirdPartyRequests": true,
+    "cacheAjaxRequests": false,
+    "preloadImages": false,
+    "waitFor": 2000,
+    "removeBlobs": true,
+    "minifyHtml": true,
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox",
+      "--disable-dev-shm-usage",
+      "--disable-accelerated-2d-canvas",
+      "--no-first-run",
+      "--no-zygote",
+      "--disable-gpu"
+    ]
   },
   "dependencies": {
     "lucide-react": "^0.344.0",
@@ -18,7 +48,6 @@
     "react-router-dom": "^6.22.3"
   },
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.7",
     "@types/node": "^24.7.2",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
@@ -31,6 +60,7 @@
     "eslint-plugin-react-refresh": "^0.4.5",
     "postcss": "^8.4.35",
     "puppeteer": "^24.24.1",
+    "react-snap": "^1.23.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
     "vite": "^5.1.6"
