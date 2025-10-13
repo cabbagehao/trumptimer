@@ -28,6 +28,7 @@ const PREVIEW_PORT = BASE_URL_OBJECT.port || (BASE_URL_OBJECT.protocol === 'http
 const PREVIEW_PING_URL = BASE_URL_OBJECT.href;
 const NPM_COMMAND = process.platform === 'win32' ? 'npm.cmd' : 'npm';
 const SERVER_TIMEOUT_MS = 45000;
+const CUSTOM_EXECUTABLE_PATH = process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_PATH || null;
 
 function stripAnsi(value) {
   return value.replace(/\u001b\[[0-9;]*m/g, '');
@@ -146,8 +147,12 @@ async function prerender() {
     await new Promise(resolve => setTimeout(resolve, 3000));
 
     console.log('🌐 Launching browser...');
+    if (CUSTOM_EXECUTABLE_PATH) {
+      console.log(`🧭 Using Chromium executable at ${CUSTOM_EXECUTABLE_PATH}`);
+    }
     browser = await puppeteer.launch({
       headless: true,
+      executablePath: CUSTOM_EXECUTABLE_PATH ?? undefined,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
