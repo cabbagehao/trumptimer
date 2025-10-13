@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import puppeteer from 'puppeteer';
+import http from 'node:http';
+import https from 'node:https';
 import { promises as fs } from 'fs';
 import path from 'path';
 import { spawn } from 'child_process';
@@ -19,51 +21,110 @@ const routes = [
 ];
 
 // Base URL for the dev server
-const BASE_URL = 'http://localhost:4173'; // Vite preview server
+const BASE_URL = process.env.PRERENDER_BASE_URL ?? 'http://127.0.0.1:4173'; // Vite preview server
+const BASE_URL_OBJECT = new URL(BASE_URL);
+const PREVIEW_HOST = BASE_URL_OBJECT.hostname;
+const PREVIEW_PORT = BASE_URL_OBJECT.port || (BASE_URL_OBJECT.protocol === 'https:' ? '443' : '80');
+const PREVIEW_PING_URL = BASE_URL_OBJECT.href;
+const NPM_COMMAND = process.platform === 'win32' ? 'npm.cmd' : 'npm';
+const SERVER_TIMEOUT_MS = 45000;
+
+function stripAnsi(value) {
+  return value.replace(/\u001b\[[0-9;]*m/g, '');
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function waitForServer(url, timeoutMs = SERVER_TIMEOUT_MS) {
+  const deadline = Date.now() + timeoutMs;
+  const requester = url.startsWith('https:') ? https : http;
+
+  while (Date.now() < deadline) {
+    const isReady = await new Promise((resolve) => {
+      const request = requester.get(url, (res) => {
+        res.resume();
+        resolve(true);
+      });
+
+      request.on('error', () => resolve(false));
+      request.setTimeout(2000, () => {
+        request.destroy();
+        resolve(false);
+      });
+    });
+
+    if (isReady) {
+      return;
+    }
+
+    await sleep(500);
+  }
+
+  throw new Error(`Preview server was not reachable at ${url} within ${timeoutMs}ms`);
+}
 
 async function startPreviewServer() {
   console.log('🔧 Starting preview server...');
-  const server = spawn('npm', ['run', 'preview'], {
-    stdio: 'pipe',
-    shell: true
+  const server = spawn(NPM_COMMAND, ['run', 'preview', '--', '--host', PREVIEW_HOST, '--port', String(PREVIEW_PORT)], {
+    stdio: 'pipe'
   });
 
   // Collect output for debugging
   let output = '';
   server.stdout.on('data', (data) => {
-    output += data.toString();
-    console.log('[Preview Server]:', data.toString().trim());
+    const text = data.toString();
+    output += text;
+    console.log('[Preview Server]:', stripAnsi(text).trim());
   });
 
   server.stderr.on('data', (data) => {
-    console.error('[Preview Server Error]:', data.toString().trim());
+    const text = data.toString();
+    output += text;
+    console.error('[Preview Server Error]:', stripAnsi(text).trim());
   });
 
   // Wait for server to be ready with timeout
   const serverReady = new Promise((resolve, reject) => {
+    let finished = false;
     const timeout = setTimeout(() => {
-      reject(new Error('Preview server start timeout (30s). Output:\n' + output));
-    }, 30000);
-
-    server.stdout.on('data', (data) => {
-      if (data.toString().includes('Local:')) {
-        clearTimeout(timeout);
-        console.log('✅ Preview server ready');
-        resolve();
-      }
-    });
+      if (finished) return;
+      finished = true;
+      reject(new Error(`Preview server start timeout (${SERVER_TIMEOUT_MS / 1000}s). Output:\n${stripAnsi(output)}`));
+    }, SERVER_TIMEOUT_MS);
 
     server.on('error', (err) => {
+      if (finished) return;
+      finished = true;
       clearTimeout(timeout);
       reject(err);
     });
 
     server.on('exit', (code) => {
+      if (finished) return;
       if (code !== null && code !== 0) {
+        finished = true;
         clearTimeout(timeout);
-        reject(new Error(`Preview server exited with code ${code}`));
+        reject(new Error(`Preview server exited with code ${code}. Output:\n${stripAnsi(output)}`));
       }
     });
+
+    (async () => {
+      try {
+        await waitForServer(PREVIEW_PING_URL);
+        if (finished) return;
+        finished = true;
+        clearTimeout(timeout);
+        console.log('✅ Preview server ready');
+        resolve();
+      } catch (error) {
+        if (finished) return;
+        finished = true;
+        clearTimeout(timeout);
+        reject(error);
+      }
+    })();
   });
 
   await serverReady;
