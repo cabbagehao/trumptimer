@@ -6,6 +6,7 @@ import https from 'node:https';
 import { promises as fs } from 'fs';
 import path from 'path';
 import { spawn } from 'child_process';
+import { once } from 'events';
 
 // Routes to prerender
 const routes = [
@@ -64,6 +65,66 @@ async function waitForServer(url, timeoutMs = SERVER_TIMEOUT_MS) {
   }
 
   throw new Error(`Preview server was not reachable at ${url} within ${timeoutMs}ms`);
+}
+
+async function waitForExit(child, timeoutMs) {
+  if (child.exitCode !== null) {
+    return;
+  }
+
+  let timer = null;
+  const timeoutPromise = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error('Process exit timeout')), timeoutMs);
+    if (typeof timer.unref === 'function') {
+      timer.unref();
+    }
+  });
+
+  try {
+    await Promise.race([
+      once(child, 'exit'),
+      timeoutPromise
+    ]);
+  } catch (error) {
+    throw error;
+  } finally {
+    if (timer) {
+      clearTimeout(timer);
+    }
+  }
+}
+
+async function stopPreviewServer(server) {
+  console.log('🧹 Shutting down preview server...');
+
+  const streams = [server.stdout, server.stderr];
+  const tryKill = async (signal, waitMs) => {
+    if (server.exitCode !== null) {
+      return true;
+    }
+
+    server.kill(signal);
+
+    try {
+      await waitForExit(server, waitMs);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  const terminatedGracefully = await tryKill('SIGTERM', 3000);
+
+  if (!terminatedGracefully) {
+    await tryKill('SIGKILL', 2000);
+  }
+
+  streams.forEach((s) => {
+    if (s && !s.destroyed) {
+      s.removeAllListeners();
+      s.destroy();
+    }
+  });
 }
 
 async function startPreviewServer() {
@@ -214,15 +275,10 @@ async function prerender() {
     }
 
     if (previewServer) {
-      console.log('🧹 Shutting down preview server...');
-      previewServer.kill('SIGTERM');
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // Force kill if still running
       try {
-        previewServer.kill('SIGKILL');
+        await stopPreviewServer(previewServer);
       } catch (e) {
-        // Ignore error if process already dead
+        console.error('Error stopping preview server:', e.message);
       }
     }
   }
