@@ -5,9 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && react-snap",
-    "build:client": "vite build",
-    "build:ssg": "node scripts/prerender.js",
+    "build": "vite build",
+    "build:ssg": "vite build && react-snap",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -30,7 +29,8 @@
     "preloadImages": false,
     "waitFor": 2000,
     "removeBlobs": true,
-    "minifyHtml": true,
+    "minifyHtml": false,
+    "inlineCss": true,
     "puppeteerArgs": [
       "--no-sandbox",
       "--disable-setuid-sandbox",
