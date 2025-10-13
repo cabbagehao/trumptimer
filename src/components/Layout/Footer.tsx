@@ -1,4 +1,5 @@
-import { Flag, ExternalLink, FileText, Globe } from 'lucide-react';
+import { Flag, ExternalLink, FileText, Globe, User } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -25,6 +26,15 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold mb-4 uppercase tracking-wider">Resources</h3>
             <ul className="space-y-2">
+              <li>
+                <Link 
+                  to="/about/"
+                  className="text-gray-400 hover:text-white flex items-center justify-center md:justify-start gap-2"
+                >
+                  <User className="w-4 h-4" />
+                  About Trump
+                </Link>
+              </li>
               <li>
                 <a 
                   href="https://www.donaldjtrump.com/"

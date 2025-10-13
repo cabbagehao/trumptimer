@@ -1,59 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { auth, googleProvider } from './utils/firebase';
-import { getRedirectResult } from 'firebase/auth';
-import { supabase } from './utils/supabase';
 import Home from './pages/Home';
 import TrumpPolicies from './pages/TrumpPolicies';
 import TrumpQuotes from './pages/TrumpQuotes';
 import AboutTrump from './pages/AboutTrump';
-import Discussions from './pages/Discussions';
 import TrumpTermCountdown from './pages/TrumpTermCountdown';
 import TrumpSpeeches from './pages/TrumpSpeeches';
 import Inauguration from './pages/Inauguration';
 import President47 from './pages/President47';
+import TrumpDie from './pages/TrumpDie';
 
 export default function App() {
-  useEffect(() => {
-    // Handle redirect result
-    getRedirectResult(auth).then(async (result) => {
-      if (result?.user) {
-        try {
-          // Sign in with Supabase using the Firebase token
-          const { data: { session }, error: signInError } = await supabase.auth.signInWithPassword({
-            email: result.user.email!,
-            password: result.user.uid,
-          });
-
-          if (signInError?.message.includes('Invalid login credentials')) {
-            // User doesn't exist in Supabase, create them
-            const { error: signUpError } = await supabase.auth.signUp({
-              email: result.user.email!,
-              password: result.user.uid,
-            });
-
-            if (signUpError) throw signUpError;
-
-            // Create profile
-            const { error: profileError } = await supabase
-              .from('profiles')
-              .insert([{
-                id: result.user.uid,
-                nickname: result.user.displayName || `user_${result.user.uid.slice(0, 8)}`,
-                avatar_url: result.user.photoURL || null,
-              }]);
-
-            if (profileError) throw profileError;
-          }
-        } catch (err) {
-          console.error('Error handling redirect result:', err);
-        }
-      }
-    }).catch(err => {
-      console.error('Error getting redirect result:', err);
-    });
-  }, []);
-
   return (
     <Router>
       <Routes>
@@ -64,9 +21,6 @@ export default function App() {
         <Route path="/policies/" element={<TrumpPolicies />} />
         <Route path="/quotes" element={<TrumpQuotes />} />
         <Route path="/quotes/" element={<TrumpQuotes />} />
-        <Route path="/discussions" element={<Discussions />} />
-        <Route path="/discussions/" element={<Discussions />} />
-        <Route path="/discussions/event/:eventTitle" element={<Discussions />} />
         <Route path="/term-countdown" element={<TrumpTermCountdown />} />
         <Route path="/term-countdown/" element={<TrumpTermCountdown />} />
         <Route path="/speeches" element={<TrumpSpeeches />} />
@@ -75,6 +29,8 @@ export default function App() {
         <Route path="/inauguration/" element={<Inauguration />} />
         <Route path="/president47" element={<President47 />} />
         <Route path="/president47/" element={<President47 />} />
+        <Route path="/trump-die" element={<TrumpDie />} />
+        <Route path="/trump-die/" element={<TrumpDie />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

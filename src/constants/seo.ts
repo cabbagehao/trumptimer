@@ -62,15 +62,10 @@ export const PAGE_SEO = {
     description: "Collection of Donald Trump's most memorable quotes, speeches, and statements from his presidency and political career.",
     keywords: "trump quotes, trump speeches, presidential quotes, trump statements"
   },
-  discussions: {
-    title: "Trump Presidency Discussions",
-    description: "Join discussions about Trump's presidency, share opinions, and connect with others following the 2025-2029 presidential term.",
-    keywords: "trump discussions, presidential forum, trump presidency community, political discussions"
-  },
   termCountdown: {
-    title: "Trump Term Countdown & Presidency Tracker",
-    description: "Real-time countdown to key milestones in Trump's presidential term. Track important dates, events, and achievements.",
-    keywords: "trump term countdown, presidency tracker, presidential milestones, trump term events"
+    title: "Trump Term Countdown",
+    description: "Real-time countdown tracking Trump's presidential term end date, key milestones, and achievements during his 2025-2029 presidency.",
+    keywords: "trump term countdown, trump presidency end date, presidential term tracker, trump term milestones, when does trump term end, trump presidency timeline"
   },
   speeches: {
     title: "Donald Trump's Notable Speeches",

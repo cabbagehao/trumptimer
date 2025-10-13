@@ -5,6 +5,10 @@ export function getCanonicalUrl(path: string = ''): string {
 }
 
 export function getMetaTitle(pageTitle?: string): string {
+  // For home page (when pageTitle matches base title prefix), use base title only
+  if (pageTitle && SEO.title.startsWith(pageTitle)) {
+    return SEO.title;
+  }
   return pageTitle ? `${pageTitle} | ${SEO.title}` : SEO.title;
 }
 

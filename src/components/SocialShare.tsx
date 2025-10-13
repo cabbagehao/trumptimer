@@ -2,7 +2,6 @@ import { Facebook, Share2, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { calculateTimeRemaining } from '../utils/dateUtils';
 import { generateShareImage } from '../utils/imageGenerator';
-import FeedbackButton from './Feedback/FeedbackButton';
 
 interface SocialPlatform {
   name: string;
@@ -86,11 +85,6 @@ export default function SocialShare() {
           ${isOpen ? 'flex' : 'hidden lg:flex'}
         `}
       >
-        {/* Mobile Feedback Button */}
-        <div className="lg:hidden">
-          <FeedbackButton isMobile isOpen={isOpen} />
-        </div>
-
         {platforms.map((platform) => (
           <button
             key={platform.name}

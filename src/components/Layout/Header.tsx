@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Flag, Menu, X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
-import AuthButton from '../Auth/AuthButton';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,18 +29,6 @@ export default function Header() {
                 Term Countdown
               </Link>
               <Link 
-                to="/discussions/"
-                className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors"
-              >
-                Discussions
-              </Link>
-              <Link 
-                to="/about/"
-                className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors"
-              >
-                About Trump
-              </Link>
-              <Link 
                 to="/policies/"
                 className="bg-white text-red-600 px-4 py-2 rounded-full font-semibold hover:bg-red-50 transition-colors"
               >
@@ -53,10 +40,13 @@ export default function Header() {
               >
                 Quotes
               </Link>
+              <Link 
+                to="/trump-die/"
+                className="bg-black text-white px-4 py-2 rounded-full font-semibold hover:bg-gray-800 transition-colors"
+              >
+                Trump Die?
+              </Link>
             </nav>
-            <div className="hidden lg:block">
-              <AuthButton />
-            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -76,29 +66,12 @@ export default function Header() {
         {isMenuOpen && (
           <div className="lg:hidden mt-4">
             <nav className="flex flex-col gap-2">
-              <div className="mb-2">
-                <AuthButton />
-              </div>
               <Link 
                 to="/term-countdown/"
                 className="bg-white text-red-600 px-4 py-2 rounded-lg font-semibold hover:bg-red-50 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Term Countdown
-              </Link>
-              <Link 
-                to="/discussions/"
-                className="bg-white text-red-600 px-4 py-2 rounded-lg font-semibold hover:bg-red-50 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Discussions
-              </Link>
-              <Link 
-                to="/about/"
-                className="bg-white text-red-600 px-4 py-2 rounded-lg font-semibold hover:bg-red-50 transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About Trump
               </Link>
               <Link 
                 to="/policies/"
@@ -113,6 +86,13 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Quotes
+              </Link>
+              <Link 
+                to="/trump-die/"
+                className="bg-black text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-800 transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Trump Die?
               </Link>
             </nav>
           </div>
