@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && npm run preview & sleep 3 && node scripts/prerender.js && pkill -f 'vite preview'",
+    "build": "npm run build:client && npm run build:ssg",
     "build:client": "tsc && vite build",
+    "build:ssg": "node scripts/prerender.js",
     "lint": "eslint .",
     "preview": "vite preview"
   },

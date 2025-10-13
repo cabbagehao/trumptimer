@@ -3,6 +3,7 @@
 import puppeteer from 'puppeteer';
 import { promises as fs } from 'fs';
 import path from 'path';
+import { spawn } from 'child_process';
 
 // Routes to prerender
 const routes = [
@@ -20,11 +21,40 @@ const routes = [
 // Base URL for the dev server
 const BASE_URL = 'http://localhost:4173'; // Vite preview server
 
+async function startPreviewServer() {
+  console.log('🔧 Starting preview server...');
+  const server = spawn('npm', ['run', 'preview'], {
+    stdio: 'pipe',
+    shell: true
+  });
+
+  // Wait for server to be ready
+  await new Promise((resolve) => {
+    server.stdout.on('data', (data) => {
+      if (data.toString().includes('Local:')) {
+        console.log('✅ Preview server ready');
+        resolve();
+      }
+    });
+  });
+
+  return server;
+}
+
 async function prerender() {
   console.log('🚀 Starting SSG prerendering...');
-  
-  const browser = await puppeteer.launch({ headless: true });
-  const page = await browser.newPage();
+
+  let previewServer = null;
+
+  try {
+    // Start the preview server
+    previewServer = await startPreviewServer();
+
+    // Wait a bit more to ensure server is fully ready
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    const browser = await puppeteer.launch({ headless: true });
+    const page = await browser.newPage();
   
   // Create dist directory if it doesn't exist
   const distDir = './dist';
@@ -60,8 +90,16 @@ async function prerender() {
     }
   }
   
-  await browser.close();
-  console.log('🎉 Prerendering complete!');
+    await browser.close();
+    console.log('🎉 Prerendering complete!');
+  } finally {
+    // Clean up: kill the preview server
+    if (previewServer) {
+      console.log('🧹 Shutting down preview server...');
+      previewServer.kill('SIGTERM');
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+  }
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
