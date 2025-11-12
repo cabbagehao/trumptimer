@@ -2,6 +2,7 @@ import React from 'react';
 import { Crown, Award, Landmark } from 'lucide-react';
 import Layout from '../components/Layout/Layout';
 import SEOHead from '../components/SEO/SEOHead';
+import RelatedPagesSection from '../components/RelatedPagesSection';
 import { PAGE_SEO } from '../constants/seo';
 import { getPersonStructuredData, getBreadcrumbStructuredData } from '../utils/structuredData';
 
@@ -29,8 +30,8 @@ export default function President47() {
         type="article"
         structuredData={structuredData}
       />
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-8">
+      <div className="max-w-4xl mx-auto space-y-8">
+        <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8">
           <div className="flex items-center gap-2 mb-6">
             <Crown className="w-8 h-8 text-red-600" />
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">The 47th President</h1>
@@ -73,6 +74,7 @@ export default function President47() {
             </div>
           </div>
         </div>
+        <RelatedPagesSection current="president47" />
       </div>
     </Layout>
   );

@@ -7,6 +7,7 @@ import FAQ from '../components/Home/FAQ';
 import SEOHead from '../components/SEO/SEOHead';
 import { PAGE_SEO } from '../constants/seo';
 import { getOrganizationStructuredData, getWebSiteStructuredData } from '../utils/structuredData';
+import RelatedPagesSection from '../components/RelatedPagesSection';
 
 export default function Home() {
   const structuredData = {
@@ -30,6 +31,7 @@ export default function Home() {
         <InaugurationCountdown />
         <Timeline />
         <FAQ />
+        <RelatedPagesSection current="home" />
         <SocialShare />
       </div>
     </Layout>

@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/Layout/Layout';
 import TableOfContents from '../../components/TableOfContents/TableOfContents';
 import PageContent from '../../components/PageContent/PageContent';
+import RelatedPagesSection from '../../components/RelatedPagesSection';
 import { inaugurationSections } from './sections';
 import { Ceremony } from './Ceremony';
 import SEOHead from '../../components/SEO/SEOHead';
@@ -45,6 +46,7 @@ export default function Inauguration() {
           <TableOfContents sections={inaugurationSections} />
           <PageContent>
             <Ceremony />
+            <RelatedPagesSection current="inauguration" className="mt-12" />
           </PageContent>
         </div>
       </div>

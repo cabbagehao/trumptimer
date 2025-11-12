@@ -1,18 +1,94 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Layout from '../components/Layout/Layout';
 import { Clock, Calendar, TrendingUp, Users, Globe, DollarSign, HelpCircle } from 'lucide-react';
-import { INAUGURATION_DATE } from '../constants/dates';
+import { INAUGURATION_DATE, TERM_END_DATE } from '../constants/dates';
 import SEOHead from '../components/SEO/SEOHead';
 import { PAGE_SEO } from '../constants/seo';
 import { getEventStructuredData, getBreadcrumbStructuredData } from '../utils/structuredData';
+import RelatedPagesSection from '../components/RelatedPagesSection';
+
+const MS_IN_SECOND = 1000;
+const SECONDS_IN_MINUTE = 60;
+const MINUTES_IN_HOUR = 60;
+const HOURS_IN_DAY = 24;
+const SECONDS_IN_HOUR = SECONDS_IN_MINUTE * MINUTES_IN_HOUR;
+const SECONDS_IN_DAY = HOURS_IN_DAY * SECONDS_IN_HOUR;
+const TOTAL_TERM_SECONDS = Math.max(1, Math.floor((TERM_END_DATE.getTime() - INAUGURATION_DATE.getTime()) / MS_IN_SECOND));
+
+type TimeBreakdown = {
+  totalSeconds: number;
+  totalDays: number;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
+type TermTiming = {
+  elapsed: TimeBreakdown;
+  remaining: TimeBreakdown;
+  progressPercentage: number;
+};
+
+function decomposeTime(diffMs: number): TimeBreakdown {
+  const totalSeconds = Math.max(0, Math.floor(diffMs / MS_IN_SECOND));
+  const days = Math.floor(totalSeconds / SECONDS_IN_DAY);
+  const hours = Math.floor((totalSeconds % SECONDS_IN_DAY) / SECONDS_IN_HOUR);
+  const minutes = Math.floor((totalSeconds % SECONDS_IN_HOUR) / SECONDS_IN_MINUTE);
+  const seconds = totalSeconds % SECONDS_IN_MINUTE;
+
+  return {
+    totalSeconds,
+    totalDays: Math.floor(totalSeconds / SECONDS_IN_DAY),
+    days,
+    hours,
+    minutes,
+    seconds,
+  };
+}
+
+function getTermTiming(): TermTiming {
+  const nowMs = Date.now();
+  const elapsedMs = Math.max(0, nowMs - INAUGURATION_DATE.getTime());
+  const remainingMs = Math.max(0, TERM_END_DATE.getTime() - nowMs);
+
+  const elapsed = decomposeTime(elapsedMs);
+  const remaining = decomposeTime(remainingMs);
+  const progressPercentage = Math.min(100, Math.max(0, Math.round((elapsed.totalSeconds / TOTAL_TERM_SECONDS) * 100)));
+
+  return {
+    elapsed,
+    remaining,
+    progressPercentage,
+  };
+}
+
+function formatWithPadding(value: number) {
+  return value.toString().padStart(2, '0');
+}
 
 export default function TrumpTermCountdown() {
-  const now = new Date();
-  const termEndDate = new Date('2029-01-20T17:00:00.000Z');
-  const daysSinceInauguration = Math.floor((now.getTime() - INAUGURATION_DATE.getTime()) / (1000 * 60 * 60 * 24));
-  const daysUntilTermEnd = Math.floor((termEndDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-  const totalTermDays = Math.floor((termEndDate.getTime() - INAUGURATION_DATE.getTime()) / (1000 * 60 * 60 * 24));
-  const progressPercentage = Math.round((daysSinceInauguration / totalTermDays) * 100);
+  const [timing, setTiming] = useState<TermTiming>(() => getTermTiming());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTiming(getTermTiming());
+    }, MS_IN_SECOND);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const { elapsed, remaining, progressPercentage } = timing;
+
+  const countdownSegments = useMemo(() => ([
+    { label: 'Days', value: remaining.days.toString() },
+    { label: 'Hours', value: formatWithPadding(remaining.hours) },
+    { label: 'Minutes', value: formatWithPadding(remaining.minutes) },
+    { label: 'Seconds', value: formatWithPadding(remaining.seconds) },
+  ]), [remaining]);
+
+  const daysInOfficeDisplay = Math.max(0, elapsed.totalDays);
+  const daysRemainingDisplay = Math.max(0, remaining.totalDays);
 
   const breadcrumbData = getBreadcrumbStructuredData([
     { name: "Home", url: "https://trumptimer.us/" },
@@ -77,16 +153,38 @@ export default function TrumpTermCountdown() {
             </div>
           </div>
 
+          <div className="bg-white rounded-lg p-6 mb-6 shadow-inner">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Clock className="w-6 h-6 text-blue-600" />
+              <h2 className="text-xl font-bold">Live Countdown to Term End</h2>
+            </div>
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+              {countdownSegments.map((segment) => (
+                <div key={segment.label} className="text-center min-w-[80px]">
+                  <div className="text-4xl sm:text-5xl font-bold text-blue-600">
+                    {segment.value}
+                  </div>
+                  <div className="text-sm uppercase tracking-wide text-gray-500 mt-1">
+                    {segment.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="text-center text-sm text-gray-600 mt-6">
+              Until January 20, 2029 at 12:00 PM EST
+            </div>
+          </div>
+
           {/* Countdown Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="bg-white rounded-lg p-4 text-center shadow">
               <Clock className="w-8 h-8 text-red-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-red-600 mb-1">{daysSinceInauguration}</div>
+              <div className="text-2xl font-bold text-red-600 mb-1">{daysInOfficeDisplay}</div>
               <div className="text-sm text-gray-600">Days in Office</div>
             </div>
             <div className="bg-white rounded-lg p-4 text-center shadow">
               <Calendar className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-              <div className="text-2xl font-bold text-blue-600 mb-1">{daysUntilTermEnd}</div>
+              <div className="text-2xl font-bold text-blue-600 mb-1">{daysRemainingDisplay}</div>
               <div className="text-sm text-gray-600">Days Remaining</div>
             </div>
           </div>
@@ -257,7 +355,7 @@ export default function TrumpTermCountdown() {
                 How many days are left in Trump's presidency?
               </h3>
               <p className="text-gray-700">
-                Our real-time counter shows exactly {daysUntilTermEnd} days remaining until the <strong>Trump presidency end date</strong>. 
+                Our real-time counter shows exactly {daysRemainingDisplay} days remaining until the <strong>Trump presidency end date</strong>. 
                 This countdown updates every second, providing the most accurate tracking of <strong>when Trump's term ends</strong>. 
                 The countdown includes all remaining days, hours, minutes, and seconds of his presidency.
               </p>
@@ -313,6 +411,8 @@ export default function TrumpTermCountdown() {
             </div>
           </div>
         </div>
+
+        <RelatedPagesSection current="termCountdown" />
       </div>
     </Layout>
   );

@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Skull, TrendingUp, Clock, AlertTriangle, Stethoscope, Scale, Target } from 'lucide-react';
 import Layout from '../components/Layout/Layout';
+import SEOHead from '../components/SEO/SEOHead';
+import RelatedPagesSection from '../components/RelatedPagesSection';
+import { PAGE_SEO } from '../constants/seo';
+import { getArticleStructuredData, getBreadcrumbStructuredData } from '../utils/structuredData';
 
 interface VotingOption {
   id: string;
@@ -12,20 +16,22 @@ interface VotingOption {
 }
 
 const TrumpDie: React.FC = () => {
-  // Set page title and meta description for SEO
-  useEffect(() => {
-    document.title = 'Is Trump Dead? Did Trump Die Today? Latest Updates 2025';
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', 'Is Trump dead? Did Donald Trump die today? Find out if Trump died, when will Trump die, what happens if Trump dies. Latest news and predictions about Trump\'s death.');
-    } else {
-      const meta = document.createElement('meta');
-      meta.name = 'description';
-      meta.content = 'Is Trump dead? Did Donald Trump die today? Find out if Trump died, when will Trump die, what happens if Trump dies. Latest news and predictions about Trump\'s death.';
-      document.head.appendChild(meta);
-    }
-  }, []);
-  
+  const breadcrumbData = getBreadcrumbStructuredData([
+    { name: 'Home', url: 'https://trumptimer.us/' },
+    { name: 'Is Trump Dead?', url: 'https://trumptimer.us/trump-die/' },
+  ]);
+
+  const articleData = getArticleStructuredData(
+    PAGE_SEO.trumpDie.title,
+    PAGE_SEO.trumpDie.description,
+    '/trump-die/'
+  );
+
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@graph': [articleData, breadcrumbData],
+  };
+
   const [votingOptions, setVotingOptions] = useState<VotingOption[]>([
     {
       id: 'natural',
@@ -115,6 +121,14 @@ const TrumpDie: React.FC = () => {
 
   return (
     <Layout>
+      <SEOHead
+        title={PAGE_SEO.trumpDie.title}
+        description={PAGE_SEO.trumpDie.description}
+        keywords={PAGE_SEO.trumpDie.keywords}
+        path="/trump-die/"
+        type="article"
+        structuredData={structuredData}
+      />
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white -mx-4 px-4">
         <div className="container mx-auto py-8">
           {/* Header */}
@@ -454,6 +468,10 @@ const TrumpDie: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto mt-12">
+          <RelatedPagesSection current="trumpDie" />
         </div>
       </div>
     </Layout>

@@ -4,7 +4,7 @@ export function getOrganizationStructuredData() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Trump Term Timer",
+    "name": "Trump Presidency Timer",
     "url": SEO.url,
     "logo": `${SEO.url}/favicon-192x192.png`,
     "description": SEO.description,
@@ -18,7 +18,7 @@ export function getWebSiteStructuredData() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "Trump Term Timer",
+    "name": "Trump Presidency Timer",
     "url": SEO.url,
     "description": SEO.description,
     "potentialAction": {
@@ -53,11 +53,11 @@ export function getArticleStructuredData(title: string, description: string, pat
     "dateModified": dateModified || new Date().toISOString().split('T')[0],
     "author": {
       "@type": "Organization",
-      "name": "Trump Term Timer"
+      "name": "Trump Presidency Timer"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Trump Term Timer",
+      "name": "Trump Presidency Timer",
       "logo": {
         "@type": "ImageObject",
         "url": `${SEO.url}/favicon-192x192.png`

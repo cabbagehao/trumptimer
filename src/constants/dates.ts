@@ -1,5 +1,6 @@
 // All dates are in UTC
 export const INAUGURATION_DATE = new Date('2025-01-20T17:00:00.000Z'); // 12:00 EST
+export const TERM_END_DATE = new Date('2029-01-20T17:00:00.000Z'); // 12:00 EST
 
 export const KEY_DATES = {
   ELECTION_RESULTS: new Date('2024-11-06T00:00:00.000Z'),
@@ -8,4 +9,5 @@ export const KEY_DATES = {
   NEW_CONGRESS: new Date('2025-01-03T00:00:00.000Z'),
   ELECTORAL_VOTE_COUNT: new Date('2025-01-06T00:00:00.000Z'),
   INAUGURATION: INAUGURATION_DATE,
+  TERM_END: TERM_END_DATE,
 } as const;

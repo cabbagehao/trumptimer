@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/Layout/Layout';
 import TableOfContents from '../../components/TableOfContents/TableOfContents';
 import PageContent from '../../components/PageContent/PageContent';
+import RelatedPagesSection from '../../components/RelatedPagesSection';
 import { aboutSections } from './sections';
 import BasicInfo from './components/BasicInfo';
 import PoliticalCareer from './components/PoliticalCareer';
@@ -43,6 +44,7 @@ export default function AboutTrump() {
             <PoliticalCareer />
             <KeySpeeches />
             <AdditionalResources />
+            <RelatedPagesSection current="about" className="mt-12" />
           </PageContent>
         </div>
       </div>

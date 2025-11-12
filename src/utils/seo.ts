@@ -5,11 +5,24 @@ export function getCanonicalUrl(path: string = ''): string {
 }
 
 export function getMetaTitle(pageTitle?: string): string {
-  // For home page (when pageTitle matches base title prefix), use base title only
-  if (pageTitle && SEO.title.startsWith(pageTitle)) {
-    return SEO.title;
+  const MAX_LENGTH = 60;
+  const baseTitle = SEO.title;
+
+  if (!pageTitle) {
+    return baseTitle.length <= MAX_LENGTH ? baseTitle : baseTitle.slice(0, MAX_LENGTH);
   }
-  return pageTitle ? `${pageTitle} | ${SEO.title}` : SEO.title;
+
+  const combinedTitle = `${pageTitle} | ${baseTitle}`;
+
+  if (combinedTitle.length <= MAX_LENGTH) {
+    return combinedTitle;
+  }
+
+  if (pageTitle.length <= MAX_LENGTH) {
+    return pageTitle;
+  }
+
+  return pageTitle.slice(0, MAX_LENGTH);
 }
 
 export function getOgImageUrl(imageUrl?: string): string {

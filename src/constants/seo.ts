@@ -32,8 +32,8 @@ export const SEO_KEYWORDS = {
 } as const;
 
 export const SEO = {
-  title: "Trump Presidential Term Countdown | Live Updates",
-  description: "Track Trump's presidential term with real-time updates on major policy changes, executive orders, and key events shaping America's future.",
+  title: "Trump Presidency Timer - Live Term Countdown",
+  description: "Watch the live timer since Donald Trump's 2025 inauguration and countdown every second until his presidential term ends in 2029.",
   domain: "trumptimer.us",
   url: "https://trumptimer.us",
   twitterHandle: "@TrumpTimer2025",
@@ -43,9 +43,9 @@ export const SEO = {
 
 export const PAGE_SEO = {
   home: {
-    title: "Trump Presidential Term Countdown",
-    description: "Track Trump's presidential term with real-time updates on major policy changes, executive orders, and key events shaping America's future.",
-    keywords: "trump presidency countdown, trump term 2025-2029, presidential term tracker"
+    title: "Trump Inauguration Timer - Time Since Jan 20 2025",
+    description: "Follow the live timer showing exactly how long Donald Trump has been in office since January 20, 2025, updating every second.",
+    keywords: "trump inauguration timer, time since trump inauguration, trump in office counter"
   },
   about: {
     title: "About Donald Trump",
@@ -63,8 +63,8 @@ export const PAGE_SEO = {
     keywords: "trump quotes, trump speeches, presidential quotes, trump statements"
   },
   termCountdown: {
-    title: "Trump Term Countdown",
-    description: "Real-time countdown tracking Trump's presidential term end date, key milestones, and achievements during his 2025-2029 presidency.",
+    title: "Trump Term Countdown - Ends Jan 20 2029",
+    description: "See the live countdown tracking every second until Donald Trump's presidency ends on January 20, 2029.",
     keywords: "trump term countdown, trump presidency end date, presidential term tracker, trump term milestones, when does trump term end, trump presidency timeline"
   },
   speeches: {
@@ -78,8 +78,13 @@ export const PAGE_SEO = {
     keywords: "trump inauguration 2025, presidential inauguration, inauguration ceremony, trump swearing in"
   },
   president47: {
-    title: "The 47th President",
+    title: "Donald Trump: The 47th President",
     description: "Donald Trump as the 47th President of the United States. Historic return to office and presidency overview for 2025-2029.",
     keywords: "47th president, trump presidency, donald trump president, trump administration"
+  },
+  trumpDie: {
+    title: "Is Trump Dead? Latest Updates",
+    description: "Get the latest updates on Donald Trump's health, address rumors, and see what happens if the president dies while in office.",
+    keywords: "is trump dead, did trump die, trump death rumors, trump health update"
   }
 } as const;

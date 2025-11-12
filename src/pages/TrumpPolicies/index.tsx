@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/Layout/Layout';
 import TableOfContents from '../../components/TableOfContents/TableOfContents';
 import PageContent from '../../components/PageContent/PageContent';
+import RelatedPagesSection from '../../components/RelatedPagesSection';
 import { policySections } from './sections';
 import { Policy } from './Policy';
 import SEOHead from '../../components/SEO/SEOHead';
@@ -43,6 +44,7 @@ export default function TrumpPolicies() {
           <TableOfContents sections={policySections} />
           <PageContent>
             <Policy />
+            <RelatedPagesSection current="policies" className="mt-12" />
           </PageContent>
         </div>
       </div>

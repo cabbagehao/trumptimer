@@ -1,10 +1,54 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Clock, Calendar, Flag } from 'lucide-react';
+import { INAUGURATION_DATE } from '../../constants/dates';
+
+type ElapsedTime = {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+};
+
+const MS_IN_SECOND = 1000;
+const SECONDS_IN_MINUTE = 60;
+const MINUTES_IN_HOUR = 60;
+const HOURS_IN_DAY = 24;
+const SECONDS_IN_HOUR = SECONDS_IN_MINUTE * MINUTES_IN_HOUR;
+const SECONDS_IN_DAY = HOURS_IN_DAY * SECONDS_IN_HOUR;
+
+function getElapsedTime(): ElapsedTime {
+  const now = new Date();
+  const diffInSeconds = Math.max(0, Math.floor((now.getTime() - INAUGURATION_DATE.getTime()) / MS_IN_SECOND));
+
+  const days = Math.floor(diffInSeconds / SECONDS_IN_DAY);
+  const hours = Math.floor((diffInSeconds % SECONDS_IN_DAY) / SECONDS_IN_HOUR);
+  const minutes = Math.floor((diffInSeconds % SECONDS_IN_HOUR) / SECONDS_IN_MINUTE);
+  const seconds = diffInSeconds % SECONDS_IN_MINUTE;
+
+  return { days, hours, minutes, seconds };
+}
+
+function formatWithPadding(value: number) {
+  return value.toString().padStart(2, '0');
+}
 
 export default function InaugurationCountdown() {
-  const inaugurationDate = new Date('2025-01-20T17:00:00.000Z');
-  const now = new Date();
-  const daysSinceInauguration = Math.floor((now.getTime() - inaugurationDate.getTime()) / (1000 * 60 * 60 * 24));
+  const [elapsedTime, setElapsedTime] = useState<ElapsedTime>(() => getElapsedTime());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setElapsedTime(getElapsedTime());
+    }, MS_IN_SECOND);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const timeSegments = useMemo(() => ([
+    { label: 'Days', value: elapsedTime.days.toString() },
+    { label: 'Hours', value: formatWithPadding(elapsedTime.hours) },
+    { label: 'Minutes', value: formatWithPadding(elapsedTime.minutes) },
+    { label: 'Seconds', value: formatWithPadding(elapsedTime.seconds) },
+  ]), [elapsedTime]);
 
   return (
     <div className="bg-gradient-to-br from-red-50 to-blue-50 rounded-xl shadow-lg p-6 sm:p-8 mb-8">
@@ -12,13 +56,13 @@ export default function InaugurationCountdown() {
         <div className="flex items-center justify-center gap-2 mb-4">
           <Flag className="w-8 h-8 text-red-600" />
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-800">
-            Trump Inauguration Countdown
+            Time Since Trump's 2025 Inauguration
           </h1>
           <Flag className="w-8 h-8 text-blue-600" />
         </div>
         <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-          Donald Trump's historic inauguration as the 47th President of the United States took place on January 20, 2025. 
-          Our Trump inauguration countdown tracked every moment leading up to this pivotal day in American history.
+          Donald Trump took the oath of office for his second term on January 20, 2025 at 12:00 PM EST.
+          This live tracker shows exactly how long he has been in office, updating every second.
         </p>
       </div>
 
@@ -26,16 +70,23 @@ export default function InaugurationCountdown() {
         <div className="flex items-center justify-center gap-2 mb-4">
           <Clock className="w-6 h-6 text-red-600" />
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
-            Days Since Trump's Inauguration
+            Trump Time in Office
           </h2>
         </div>
-        <div className="text-center">
-          <div className="text-5xl sm:text-6xl font-bold text-red-600 mb-2">
-            {daysSinceInauguration}
-          </div>
-          <div className="text-lg text-gray-600">
-            Days since January 20, 2025
-          </div>
+        <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+          {timeSegments.map((segment) => (
+            <div key={segment.label} className="text-center min-w-[80px]">
+              <div className="text-4xl sm:text-5xl font-bold text-red-600">
+                {segment.value}
+              </div>
+              <div className="text-sm uppercase tracking-wide text-gray-500 mt-1">
+                {segment.label}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="text-center text-sm text-gray-600 mt-6">
+          Since January 20, 2025 at 12:00 PM EST
         </div>
       </div>
 

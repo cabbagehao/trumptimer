@@ -2,6 +2,7 @@ import React from 'react';
 import Layout from '../../components/Layout/Layout';
 import TableOfContents from '../../components/TableOfContents/TableOfContents';
 import PageContent from '../../components/PageContent/PageContent';
+import RelatedPagesSection from '../../components/RelatedPagesSection';
 import { speechesSections } from './sections';
 import Statistics from './components/Statistics';
 import Timeline from './components/Timeline';
@@ -50,6 +51,7 @@ export default function TrumpSpeeches() {
             <Timeline />
             <SpeechList />
             <References />
+            <RelatedPagesSection current="speeches" className="mt-12" />
           </PageContent>
         </div>
       </div>
